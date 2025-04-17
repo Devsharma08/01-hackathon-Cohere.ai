@@ -7,8 +7,10 @@ import Home from "./Pages/Home";
 import SignUp ,{action as signupAction} from "./Pages/SignUp";
 import Chat,{action as chatAction} from "./Pages/Chat";
 // import Login from "./Pages/Login";
+import {loader as HistoryLoader} from './components/History'
 import Login, { action as loginAction } from "./Pages/Login";
 import { loader as chatLoader } from "./Pages/Chat";
+import History from "./components/History";
 // define routes with actions
 const router = createBrowserRouter([
   {
@@ -31,6 +33,11 @@ const router = createBrowserRouter([
     action : chatAction,
     loader : chatLoader
   },
+  {
+    path: '/chat/history/:id',
+    element : <History/>,
+    loader : HistoryLoader
+  }
 ]);
 
 const App = () => {

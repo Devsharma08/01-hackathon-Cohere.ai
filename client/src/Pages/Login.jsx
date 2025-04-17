@@ -21,12 +21,12 @@ const Login = () => {
     const checkSession = async () => {
       try {
         const res = await customFetch.get('/check'); // backend checks JWT from cookie
-        if (res.data.isLoggedIn) {
+        if (res?.data?.isLoggedIn) {
           navigate(`/chat/${res.data.user.id}`); // redirect if already logged in
         }
       } catch (err) {
-        navigate('/login')
-        console.log("No valid session:", err.message);
+         return navigate('/login')
+        // console.log("No valid session:", err.message);
       }
     };
 

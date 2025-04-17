@@ -3,7 +3,7 @@ import Sidebar from "../components/Sidebar";
 import { useChatContext } from "../Store/context";
 import { TbLayoutSidebar } from "react-icons/tb";
 import customFetch from "../utils/customFetch";
-import { Form, useActionData, useLoaderData, useNavigate, useNavigation } from "react-router-dom";
+import { Form, useActionData, useLoaderData, useNavigate, useNavigation, useParams } from "react-router-dom";
 import CodeBlock from "../components/CodeBlock";
 
 // Action function to handle the form submission
@@ -26,10 +26,8 @@ export const action = async ({ request, params }) => {
 // Loader function to fetch the chat history and session data
 export const loader = async ({ params }) => {
   const { userr } = params;
-
   const { data } = await customFetch.get(`/chat/history/${userr}`);
   console.log(data);
-  
   return data;
 };
 
@@ -40,6 +38,8 @@ const Chat = () => {
   const data = useActionData();
 
   const [prompt, setPrompt] = useState("");
+  const {userr} = useParams()
+  console.log(userr);
   
   // Ref for scroll container to auto-scroll to bottom
   const messagesEndRef = useRef(null);
@@ -147,7 +147,7 @@ const Chat = () => {
   return (
     <div className="w-full h-screen flex bg-[#333333] overflow-hidden relative">
       {/* Sidebar */}
-      <Sidebar />
+      <Sidebar id={userr} />
 
       {/* Main Content */}
       <div
